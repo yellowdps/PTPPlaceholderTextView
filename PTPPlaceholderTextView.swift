@@ -32,10 +32,16 @@ import UIKit
   private var isInRenderingPlaceholderProcess = false
   override open var text: String? {
     get {
-      return self.isPlaceholderActive ? nil : super.text
+        return self.isPlaceholderActive ? nil : super.text
     }
     set {
-      super.text = newValue
+        if let newText = newValue, !newText.isEmpty {
+            isPlaceholderActive = false
+        } else {
+            isPlaceholderActive = true
+        }
+        
+        super.text = newValue
     }
   }
   
