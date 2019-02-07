@@ -53,14 +53,14 @@ import UIKit
     set {
       super.attributedText = newValue
       
-      if let attributedText = attributedText, attributedText.length > 0 && !isInRenderingPlaceholderProcess && !isPlaceholderActive {
+      if let attributedText = newValue, attributedText.length > 0 && !isInRenderingPlaceholderProcess && !isPlaceholderActive {
         let attributes = attributedText.attributes(at: 0, effectiveRange: nil)
         // Set the text color property with the foreground color attribute of the first character, this is a mimic the default behavior of UITextView.
         self.actualTextColor = attributes[.foregroundColor] as? UIColor ?? UIColor.black
       }
       
       if !isInRenderingPlaceholderProcess {
-        self.isPlaceholderActive = (attributedText?.length ?? 0) == 0
+        self.isPlaceholderActive = (newValue?.length ?? 0) == 0
         self.renderPlaceholderText()
       }
     }
